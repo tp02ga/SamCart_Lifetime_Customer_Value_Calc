@@ -28,6 +28,11 @@ public class OrderDetails
 
   public OrderDetails(String[] lines)
   {
+    for (int i = 0; i<lines.length; i++)
+    {
+      lines[i] = lines[i].replace("\"", "");
+    }
+    
     if (lines[0].equalsIgnoreCase("Order ID"))
     {
       assert (lines[1].equalsIgnoreCase("Order Date"));
@@ -53,7 +58,7 @@ public class OrderDetails
         this.orderId = Integer.valueOf(lines[0]);
         Calendar cal = Calendar.getInstance();
         String[] dateSplit = lines[1].split("/");
-        cal.set(Integer.valueOf(dateSplit[0]), Integer.valueOf(dateSplit[1]) - 1, Integer.valueOf(dateSplit[2]));
+        cal.set(Integer.valueOf(dateSplit[2]), Integer.valueOf(dateSplit[0]) - 1, Integer.valueOf(dateSplit[1]));
 
         this.orderDate = cal.getTime();
         this.orderTime = lines[2];
